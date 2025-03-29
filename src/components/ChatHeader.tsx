@@ -4,10 +4,11 @@ import { MessageCircle, ChevronDown, Minimize2, Maximize2, X } from 'lucide-reac
 interface ChatHeaderProps {
   isMaximized: boolean;
   toggleMaximize: () => void;
-  toggleThreadsVisibility: () => void;
+  toggleThreadsVisibility?: () => void;
   toggleChatVisibility: () => void;
   isOpen: boolean;
   onClose: () => void;
+  showSidebar?: boolean;
 }
 
 const ChatHeader: React.FC<ChatHeaderProps> = ({
@@ -16,7 +17,8 @@ const ChatHeader: React.FC<ChatHeaderProps> = ({
   toggleThreadsVisibility,
   toggleChatVisibility,
   isOpen,
-  onClose
+  onClose,
+  showSidebar = false
 }) => {
   return (
     <div className="bg-blue-500 text-white p-3 flex justify-between items-center">
@@ -25,13 +27,16 @@ const ChatHeader: React.FC<ChatHeaderProps> = ({
         <span>Chatbot</span>
       </div>
       <div className="flex items-center space-x-2">
-        <button
-          onClick={toggleThreadsVisibility}
-          className="hover:bg-blue-600 p-1 rounded"
-          aria-label="Toggle threads"
-        >
-          <ChevronDown size={20} />
-        </button>
+        {/* Only show thread toggle button if sidebar is not visible and toggle function is provided */}
+        {!showSidebar && toggleThreadsVisibility && (
+          <button
+            onClick={toggleThreadsVisibility}
+            className="hover:bg-blue-600 p-1 rounded"
+            aria-label="Toggle threads"
+          >
+            <ChevronDown size={20} />
+          </button>
+        )}
         <button
           onClick={toggleMaximize}
           className="hover:bg-blue-600 p-1 rounded"
