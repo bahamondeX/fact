@@ -1,10 +1,11 @@
-from fastapi import APIRouter, UploadFile, File
+import typing as tp
+from fastapi import APIRouter, Query, UploadFile, HTTPException, File
+from bs4 import BeautifulSoup
 from anydocs import load_document
-from fastapi.responses import StreamingResponse
 
 
 app = APIRouter(prefix="/v1")
 
-@app.get("/files")
-async def process_files(file:UploadFile=File(...)):
-    return StreamingResponse(load_document(file))
+@app.post("/document")
+async def process_files(url:str):
+	return {"role":"user","content":BeautifulSoup("\n".join(load_document(url)),"lxml").get_text()}

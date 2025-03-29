@@ -2,3 +2,4 @@ fastapi[all]
 uvicorn[standard]
 anydocs @ git+https://github.com/bahamondeX/anydocs.git
 anytools[all,search] @ git+https://github.com/bahamondeX/anytools.git
+cbase64
