@@ -8,11 +8,11 @@ import ThreadSelector from "./ThreadSelector";
 import MessageList from "./MessageList";
 import InputArea from "./InputArea";
 import FileAttachmentsList from "./FileAttachment";
-import DropZone from "~/components/Dropzone";
+import DropZone from "~/components/DropZone";
 import ThreadSidebar from "./ThreadSideBar";
 
 // Minimum width where we'll show the sidebar
-const SIDEBAR_THRESHOLD_WIDTH = 700;
+const SIDEBAR_THRESHOLD_WIDTH = 600;
 
 const ChatbotWidget: React.FC = () => {
   const [state, actions] = useChatState();
@@ -58,11 +58,23 @@ const ChatbotWidget: React.FC = () => {
 
   // Determine if we should show the sidebar based on current width
   useEffect(() => {
-    if (chatboxSize.width) {
+    if (chatboxSize.width ) {
       const widthInPx = parseInt(chatboxSize.width, 10);
       setShowSidebar(widthInPx >= SIDEBAR_THRESHOLD_WIDTH);
+	  setIsThreadsVisible(true)
     }
+
   }, [chatboxSize.width]);
+
+  useEffect(() =>{
+	if (isMaximized) {
+      setShowSidebar(true);
+	  setIsThreadsVisible(true)
+    } else {
+      setShowSidebar(false);
+      setIsThreadsVisible(false)
+    }
+	},[isMaximized])
 
   // Setup drop zone
   useDropZone({

@@ -1,5 +1,5 @@
 import React from 'react';
-import { MessageCircle, ChevronDown, Minimize2, Maximize2, X } from 'lucide-react';
+import { ChevronDown, Minimize2, Maximize2, X, BotIcon } from 'lucide-react';
 
 interface ChatHeaderProps {
   isMaximized: boolean;
@@ -23,8 +23,8 @@ const ChatHeader: React.FC<ChatHeaderProps> = ({
   return (
     <div className="bg-blue-500 text-white p-3 flex justify-between items-center">
       <div className="flex items-center space-x-2">
-        <MessageCircle size={20} />
-        <span>Chatbot</span>
+        <BotIcon size={20} />
+        <span>BahamondeX</span>
       </div>
       <div className="flex items-center space-x-2">
         {/* Only show thread toggle button if sidebar is not visible and toggle function is provided */}
